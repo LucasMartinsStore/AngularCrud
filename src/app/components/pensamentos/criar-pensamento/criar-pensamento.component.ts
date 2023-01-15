@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-criar-pensamento',
@@ -6,5 +6,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./criar-pensamento.component.scss']
 })
 export class CriarPensamentoComponent {
+
+  pensamento = {
+    id: '1',
+    conteudo: 'Aprendendo Angular',
+    autoria: 'Dev',
+    modelo: 'modelo1'
+  }
+
+  constructor(){
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  criarPensamento(){
+    alert("Novo pensamento Criado");
+  }
+  cancelar(){
+    alert("cancelar");
+  }
 
 }
