@@ -1,37 +1,53 @@
-<section class="container editar-pensamentos ff-inter">
+<section class="container criar-pensamentos ff-inter">
   <header class="header">
     <h2>Adicione um <br />pensamento novo:</h2>
   </header>
-  <form>
+  <form [formGroup]="forms">
     <label for="pensamento">Pensamento</label>
     <input
-      type="textarea"
+      type="text"
       class="input"
       id="pensamento"
-      name="pensamento"
+      formControlName="conteudo"
       placeholder="Digite o pensamento"
-      [(ngModel)]="pensamento.conteudo"
     />
+    <div
+      class="mensagem__erro"
+      *ngIf="forms.get('conteudo')?.errors && forms.get('conteudo')?.touched"
+    >
+      Pensamento é obrigatório!
+    </div>
     <label for="autoria">Autoria ou fonte</label>
     <input
       type="text"
       class="input"
       id="autoria"
-      name="autoria"
+      formControlName="autoria"
       placeholder="Digite a autoria ou fonte"
-      [(ngModel)]="pensamento.autoria"
     />
+    <div
+      class="mensagem__erro"
+      *ngIf="forms.get('autoria')?.errors?.['required'] && forms.get('autoria')?.touched"
+    >
+      Autoria é obrigatória!
+    </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="forms.get('autoria')?.errors?.['minlength'] && forms.get('autoria')?.touched"
+    >
+      Autoria precisa ter no mínimo 3 caracteres!
+    </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="forms.get('autoria')?.errors?.['pattern'] && forms.get('autoria')?.touched"
+    >
+      Autoria precisa ter ser tudo minusculo!
+    </div>
     <label for="modelo">Selecione o modelo do card:</label>
     <div class="container-radio">
       <div class="radio-modelo">
         <label for="modelo1">
-          <input
-            type="radio"
-            id="modelo1"
-            value="modelo1"
-            name="modelo-card"
-            [(ngModel)]="pensamento.modelo"
-          />
+          <input type="radio" id="modelo1" value="modelo1" formControlName="modelo" />
           <div class="custom-radio">
             <span></span>
           </div>
@@ -40,22 +56,16 @@
         Prévia:
         <div class="modelo modelo1 ff-roboto-mono">
           <img src="../../../../assets/imagens/modelo1.png" alt="Aspas azuis" />
-          <p class="conteudo">{{ pensamento.conteudo }}</p>
+          <p class="conteudo">{{ forms.get('conteudo')?.value }}</p>
           <p class="autoria">
-            <b>{{ pensamento.autoria }}</b>
+            <b>{{ forms.get('autoria')?.value }}</b>
           </p>
         </div>
       </div>
 
       <div class="radio-modelo">
         <label for="modelo2">
-          <input
-            type="radio"
-            id="modelo2"
-            value="modelo2"
-            name="modelo-card"
-            [(ngModel)]="pensamento.modelo"
-          />
+          <input type="radio" id="modelo2" value="modelo2" formControlName="modelo" />
           <div class="custom-radio">
             <span></span>
           </div>
@@ -64,22 +74,16 @@
         Prévia:
         <div class="modelo modelo2 ff-roboto-mono">
           <img src="../../../../assets/imagens/modelo2.png" alt="Aspas azul claro" />
-          <p class="conteudo">{{ pensamento.conteudo }}</p>
+          <p class="conteudo">{{ forms.get('conteudo')?.value }}</p>
           <p class="autoria">
-            <b>{{ pensamento.autoria }}</b>
+            <b>{{ forms.get('autoria')?.value }}</b>
           </p>
         </div>
       </div>
 
       <div class="radio-modelo">
         <label for="modelo3">
-          <input
-            type="radio"
-            id="modelo3"
-            value="modelo3"
-            name="modelo-card"
-            [(ngModel)]="pensamento.modelo"
-          />
+          <input type="radio" id="modelo3" value="modelo3" formControlName="modelo" />
           <div class="custom-radio">
             <span></span>
           </div>
@@ -88,16 +92,18 @@
         Prévia:
         <div class="modelo modelo3 ff-roboto-mono">
           <img src="../../../../assets/imagens/modelo3.png" alt="Aspas verdes" />
-          <p class="conteudo">{{ pensamento.conteudo }}</p>
+          <p class="conteudo">{{ forms.get('conteudo')?.value }}</p>
           <p class="autoria">
-            <b>{{ pensamento.autoria }}</b>
+            <b>{{ forms.get('autoria')?.value }}</b>
           </p>
         </div>
       </div>
     </div>
     <div class="acoes">
-      <button (click)="editarPensamento()" class="botao">Salvar</button>
-      <button (click)="cancelar()" routerLink="/listarPensamento" class="botao">Cancelar</button>
+      <button [ngClass]="habilitarBotao()" [disabled]="!forms.valid" (click)="editarPensamento()">
+        Salvar
+      </button>
+      <button (click)="cancelar()" class="botao">Cancelar</button>
     </div>
   </form>
 </section>
