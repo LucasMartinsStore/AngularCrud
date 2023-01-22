@@ -20,21 +20,23 @@ export class EditarPensamentosComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.service.buscarPorId(parseInt(id!)).subscribe(() => {
+    this.service.buscarPorId(parseInt(id!)).subscribe((pensamento) => {
       this.forms = this.formBuilder.group({
+        id: [pensamento.id],
         conteudo: [
-          '',
+          pensamento.conteudo,
           Validators.compose([Validators.required, Validators.pattern(/(.|\s)*\S(.|\s)*/)]),
         ],
         autoria: [
-          '',
+          pensamento.autoria,
           Validators.compose([
             Validators.required,
             Validators.minLength(3),
             Validators.pattern(/[a-z]+/g),
+            Validators.pattern(/[a-z]/),
           ]),
         ],
-        modelo: ['modelo1'],
+        modelo: [pensamento.modelo],
       });
     });
   }

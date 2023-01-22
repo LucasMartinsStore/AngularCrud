@@ -1,4 +1,4 @@
-<section class="container criar-pensamentos ff-inter">
+<section class="container editar-pensamentos ff-inter">
   <header class="header">
     <h2>Adicione um <br />pensamento novo:</h2>
   </header>
@@ -33,15 +33,15 @@
     </div>
     <div
       class="mensagem__erro"
-      *ngIf="forms.get('autoria')?.errors?.['minlength'] && forms.get('autoria')?.touched"
-    >
-      Autoria precisa ter no mínimo 3 caracteres!
-    </div>
-    <div
-      class="mensagem__erro"
       *ngIf="forms.get('autoria')?.errors?.['pattern'] && forms.get('autoria')?.touched"
     >
       Autoria precisa ter ser tudo minusculo!
+    </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="forms.get('autoria')?.errors?.['minlength'] && forms.get('autoria')?.touched"
+    >
+      Autoria precisa ter no mínimo 3 caracteres!
     </div>
     <label for="modelo">Selecione o modelo do card:</label>
     <div class="container-radio">
@@ -100,7 +100,7 @@
       </div>
     </div>
     <div class="acoes">
-      <button [ngClass]="habilitarBotao()" [disabled]="!forms.valid" (click)="editarPensamento()">
+      <button [disabled]="!forms.valid" (click)="editarPensamento()" [ngClass]="habilitarBotao()">
         Salvar
       </button>
       <button (click)="cancelar()" class="botao">Cancelar</button>
