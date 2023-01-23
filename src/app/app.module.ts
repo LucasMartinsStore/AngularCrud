@@ -1,3 +1,4 @@
+import { BotaoCarregarMaisComponent } from './components/pensamentos/listar-pensamentos/botao-carregar-mais/botao-carregar-mais.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -23,6 +24,7 @@ import { EditarPensamentosComponent } from './components/pensamentos/editar-pens
     PensamentoCardComponent,
     ExcluirPensamentoComponent,
     EditarPensamentosComponent,
+    BotaoCarregarMaisComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
